@@ -14,6 +14,7 @@ services:
     networks:
     - default
     - opentelemetry-collector-dev-setup_default
+    - primavista
 
   mongo:
     image: mongo:8.2
@@ -102,3 +103,6 @@ networks:
   default:
   opentelemetry-collector-dev-setup_default:
     external: ${OPENTELEMETRY_COLLECTOR_DEV_ENABLED:-false}
+  primavista:
+    external: true
+    name: primavista_devcontainer_default

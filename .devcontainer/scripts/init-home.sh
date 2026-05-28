@@ -68,6 +68,31 @@ fi
     echo "GID=${HOST_GID}"
 } >> "${DEVCONTAINER_ENV}"
 
+# ---------------------------------------------------------------------------
+# Ensure the PrimaVista network exists.
+#
+# The growi devcontainer attaches to `primavista_devcontainer_default` (PrimaVista's
+# default compose network) to reach the agent-memory MCP server. If PrimaVista is
+# temporarily down (e.g., during its own development), the network would not exist
+# and the `external: true` declaration in compose.yml would block growi's
+# devcontainer from starting.
+#
+# Create a stub network with the same compose labels PrimaVista uses so:
+#   - growi can attach and start cleanly
+#   - When PrimaVista later starts, its compose adopts this network (labels match)
+# ---------------------------------------------------------------------------
+PRIMAVISTA_NETWORK="primavista_devcontainer_default"
+if ! docker network inspect "${PRIMAVISTA_NETWORK}" >/dev/null 2>&1; then
+    docker network create \
+        --label com.docker.compose.network=default \
+        --label com.docker.compose.project=primavista_devcontainer \
+        "${PRIMAVISTA_NETWORK}" >/dev/null
+    PRIMAVISTA_NETWORK_STATE="created stub (PrimaVista is not running)"
+else
+    PRIMAVISTA_NETWORK_STATE="exists"
+fi
+
 echo "init-home.sh: initialization complete"
 echo "  host dirs: ~/.claude, ~/.config/gh, ~/.config/glab-cli"
 echo "  ${DEVCONTAINER_ENV}: UID=${HOST_UID}, GID=${HOST_GID}"
+echo "  primavista network: ${PRIMAVISTA_NETWORK_STATE}"

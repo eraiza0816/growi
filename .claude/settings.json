@@ -1,6 +1,12 @@
 {
   "permissions": {
     "allow": [
+      "Bash(pnpm vitest *)",
+      "Bash(turbo run test *)",
+      "Bash(turbo run lint *)",
+      "Bash(pnpm lint:biome *)",
+      "Bash(pnpm lint:typecheck *)",
+      "mcp__primavista__search"
     ]
   },
   "enableAllProjectMcpServers": true,
@@ -28,8 +34,18 @@
       }
     ]
   },
+  "extraKnownMarketplaces": {
+    "primavista": {
+      "source": {
+        "source": "git",
+        "url": "https://gitlab.weseek.co.jp/misc/primavista.git"
+      }
+    }
+  },
   "enabledPlugins": {
+    "primavista-memory@primavista": true,
     "figma@claude-plugins-official": true,
     "mcp-client-skills@growi-mcp-tools": true
   }
+
 }
