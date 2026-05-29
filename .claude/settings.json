@@ -39,7 +39,8 @@
       "source": {
         "source": "git",
         "url": "https://gitlab.weseek.co.jp/misc/primavista.git"
-      }
+      },
+      "autoUpdate": true
     }
   },
   "enabledPlugins": {
