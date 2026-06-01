@@ -9,17 +9,15 @@ import type { SocketIoService } from '~/server/service/socket-io';
 import ElasticsearchDelegator from './elasticsearch';
 import type { ElasticsearchClientDelegator } from './elasticsearch-client-delegator';
 
-const { mockError, mockWarn, mockInfo } = vi.hoisted(() => ({
+const { mockError } = vi.hoisted(() => ({
   mockError: vi.fn(),
-  mockWarn: vi.fn(),
-  mockInfo: vi.fn(),
 }));
 
 vi.mock('~/utils/logger', () => ({
   default: vi.fn(() => ({
     debug: vi.fn(),
-    info: mockInfo,
-    warn: mockWarn,
+    info: vi.fn(),
+    warn: vi.fn(),
     error: mockError,
   })),
 }));
