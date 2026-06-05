@@ -6,7 +6,7 @@
       "Bash(turbo run lint *)",
       "Bash(pnpm lint:biome *)",
       "Bash(pnpm lint:typecheck *)",
-      "mcp__primavista__search"
+      "mcp__plugin_primavista-memory_primavista__search"
     ]
   },
   "enableAllProjectMcpServers": true,
@@ -34,6 +34,11 @@
       }
     ]
   },
+  "enabledPlugins": {
+    "primavista-memory@primavista": true,
+    "figma@claude-plugins-official": true,
+    "mcp-client-skills@growi-mcp-tools": true
+  },
   "extraKnownMarketplaces": {
     "primavista": {
       "source": {
@@ -42,11 +47,5 @@
       },
       "autoUpdate": true
     }
-  },
-  "enabledPlugins": {
-    "primavista-memory@primavista": true,
-    "figma@claude-plugins-official": true,
-    "mcp-client-skills@growi-mcp-tools": true
   }
-
 }
